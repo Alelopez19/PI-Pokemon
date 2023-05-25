@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import styles from './landing.module.css';
+import style from './landing.module.css';
 
 
 function Landing() {
     return (
-    <div className={styles.landing}>
-        <h1>Estoy en la landing</h1>
+    <div className={style.landing}>
+        <h1 className={style.h1}> falsa PokeDex</h1>
         <Link to='/home'>
-        <button>Inicio</button>
+        <button className={style.btn} >Inicio</button>
         </Link>
     </div>
     );

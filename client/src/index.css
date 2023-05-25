@@ -1,8 +1,20 @@
-body {
-  background-image: url(../src/views/pokefondo1.jpg);
-  background-position: center center;
-  background-attachment: scroll;
-  background-size: cover;
-  min-height: 100vh;
+body{
+    background-image: url(../src/views/pokemon.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    background-color: orange;
 }
 
+h1{
+    background-color: black;
+    border: 2px solid wheat;
+    border-radius: 2px;
+    font-family: 'Press Start 2P', cursive;
+    color: azure;
+    padding: 15px;
+    margin: 1rem;
+    
+}

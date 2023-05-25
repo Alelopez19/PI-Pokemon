@@ -4,6 +4,7 @@ import { getTypes } from '../../redux/actions';
 import axios from 'axios';
 
 import style from './create.module.css';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 
 function Create() {
@@ -59,10 +60,10 @@ function Create() {
         } else {
             newErrors = { ...newErrors, image: "El campo Imagen esta vacio" };
         }
-        if (/^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$/.test(form.life)) {
-            newErrors = { ...newErrors, life: "" }
+        if (/^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$/.test(form.hp)) {
+            newErrors = { ...newErrors, hp: "" }
         } else {
-            newErrors = { ...newErrors, life: "El campo HP debe ser numerico entre 0 y 100" }
+            newErrors = { ...newErrors, hp: "El campo HP debe ser numerico entre 0 y 100" }
         }
         if (/^(?:100(?:\.0{1,2})?|\d{1,2}(?:\.\d{1,2})?)$/.test(form.attack)) {
             newErrors = { ...newErrors, attack: "" }
@@ -101,60 +102,60 @@ function Create() {
 
     return (
         <form className={style.form} onSubmit={submitHandler}>
-            <div>
-                <label>Nombre: </label>
-                <input type="text" value={form.name} onChange={changeHandler} name="name" />
-                <span>{errors.name}</span>
+            <div className={style.formTitle} >
+                <label className={style.label} >Nombre: </label>
+                <input type="text" value={form.name} onChange={changeHandler} name="name" className={style.formImput} />
+                <span className={style.span}>{errors.name}</span>
             </div>
-            <div>
-                <label>Imagen: </label>
-                <input type="text" value={form.image} onChange={changeHandler} name="image" />
-                <span>{errors.image}</span>
-            </div>
-
-            <div>
-                <label>HP: </label>
-                <input type="text" value={form.hp} onChange={changeHandler} name="hp" />
-                <span>{errors.hp}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >Imagen: </label>
+                <input type="text" value={form.image} onChange={changeHandler} name="image" className={style.formImput}/>
+                <span className={style.span}>{errors.image}</span>
             </div>
 
-            <div>
-                <label>Ataque: </label>
-                <input type="text" value={form.attack} onChange={changeHandler} name="attack" />
-                <span>{errors.attack}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >HP: </label>
+                <input type="text" value={form.hp} onChange={changeHandler} name="hp" className={style.formImput}/>
+                <span className={style.span}>{errors.hp}</span>
             </div>
 
-            <div>
-                <label>Defensa: </label>
-                <input type="text" value={form.defense} onChange={changeHandler} name="defense" />
-                <span>{errors.defense}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >Ataque: </label>
+                <input type="text" value={form.attack} onChange={changeHandler} name="attack" className={style.formImput}/>
+                <span className={style.span}>{errors.attack}</span>
             </div>
 
-            <div>
-                <label>Velocidad: </label>
-                <input type="text" value={form.speed} onChange={changeHandler} name="speed" />
-                <span>{errors.speed}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >Defensa: </label>
+                <input type="text" value={form.defense} onChange={changeHandler} name="defense" className={style.formImput}/>
+                <span className={style.span}>{errors.defense}</span>
             </div>
 
-            <div>
-                <label>Peso: </label>
-                <input type="text" value={form.weight} onChange={changeHandler} name="weight" />
-                <span>{errors.weight}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >Velocidad: </label>
+                <input type="text" value={form.speed} onChange={changeHandler} name="speed" className={style.formImput}/>
+                <span className={style.span}>{errors.speed}</span>
             </div>
 
-            <div>
-                <label>Altura: </label>
-                <input type="text" value={form.height} onChange={changeHandler} name="height" />
-                <span>{errors.height}</span>
+            <div className={style.formTitle}>
+                <label className={style.label} >Peso: </label>
+                <input type="text" value={form.weight} onChange={changeHandler} name="weight" className={style.formImput}/>
+                <span className={style.span}>{errors.weight}</span>
             </div>
 
-            <div className={style.typesContainer}>
-                <label>Elegir Tipos</label>
-                <div className={style.types}>
+            <div className={style.formTitle}>
+                <label className={style.label} >Altura: </label>
+                <input type="text" value={form.height} onChange={changeHandler} name="height" className={style.formImput}/>
+                <span className={style.span}>{errors.height}</span>
+            </div>
+
+            <div className={style.formTitle}>
+                <label className={style.label}>Elegir Tipos:</label>
+                <div>
                     {types.map((type) =>
-                        <div key={type.id} className={style.type}>
-                            <p className={style.typeName}>{type.name}</p>
-                            <input type="checkbox" name={`type-${type.id}`}
+                        <div key={type.id}>
+                            <p className={style.label}>{type.name}</p>
+                            <input className={style.checkbox} type="checkbox" name={`type-${type.id}`}
                                 checked={selectedTypes.some(t => t.id === type.id)}
                                 onChange={(e) => {
                                     if (selectedTypes.some(t => t.id === type.id)) {
@@ -182,7 +183,11 @@ function Create() {
                 errors.height !== "" ||
                 selectedTypes.length === 0
             }>SUBMIT</button>
-            
+
+            <Link to='/home'>
+                <button className={style.button} >BACK TO HOME</button>
+            </Link>
+
         </form>
     )
 }

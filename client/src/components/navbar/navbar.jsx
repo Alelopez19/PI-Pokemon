@@ -3,21 +3,22 @@ import Filtros from '../Filtros/filtros';
 
 import style from './navbar.module.css'
 
-function Navbar({handleChange}) {
+function Navbar({handleChange, handleSubmit}) {
     return (
-        <div className={style}>
+        <div className={style.navbar}>
             
             <Link to='/'>
-                <button className='btn'>LANDING</button>
+                <button className={style.btn}>LANDING</button>
             </Link>
 
             <Link to='/create'>
-            <button className='btn'>CREAR POKEMON</button>
+            <button className={style.btn}>CREAR POKEMON</button>
             </Link>
             
-            <Filtros onChange={handleChange} />
+            <input type='search' className={style.input} placeholder='Buscar...' onChange={handleChange}/>
+            <button className={style.btn} onClick={handleSubmit}>BUSCAR</button>
 
-            <input type='search' className='input' placeholder='Buscar...' onChange={handleChange}/>
+            {/* <Filtros  /> */}
 
         </div>
     );

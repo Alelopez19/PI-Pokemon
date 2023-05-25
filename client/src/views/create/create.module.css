@@ -1,0 +1,74 @@
+.form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.formTitle{
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.formImput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: larger;
+}
+.span{
+    font-weight: bolder;
+    color: red;
+    background-color: black;
+}
+
+.label{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #27ae60;
+}
+
+.button:active {
+    background-color: #1e8449;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}
+
+.checkbox{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #2ecc71;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}

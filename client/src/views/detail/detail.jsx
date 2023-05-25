@@ -39,11 +39,11 @@ const Detail = () => {
 
     return (
         <div className={style.detail}>
-            {console.log(pokemon)}
             {pokemon ? (
                 <>
+                    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Press+Start+2P&display=swap" rel="stylesheet"/>
                     <h2 className={style.h2}>{pokemon.name}</h2>
-                    <img height={250} width={250} src={back ? pokemon.backImage : pokemon.image} alt="img" />
+                    <img className={style.img} src={back ? pokemon.backImage : pokemon.image} alt="img" />
                     <p className={style.p}>Life: {pokemon.hp}</p>
                     <p className={style.p}>Attack: {pokemon.attack}</p>
                     <p className={style.p}>Defense: {pokemon.defense}</p>

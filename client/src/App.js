@@ -1,11 +1,11 @@
-import './App.css';
+import style from './App.module.css';
 import { Route, Switch } from 'react-router-dom';
 import { Home, Landing, Detail, Form } from './views'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Pokemon</h1>
+    <div className={style.App}>
+
       <Switch>
         <Route exact path ='/' component= {Landing} />
         <Route exact path = '/home' component= {Home} />
