@@ -37,7 +37,8 @@ body{
     background-color: black;
     border: 2px solid wheat;
     border-radius: 2px;
-    color: azure;
+    font-family: 'Press Start 2P', cursive;
+    color: #dcff18;
     padding: 15px;
     margin: 1rem;
 }

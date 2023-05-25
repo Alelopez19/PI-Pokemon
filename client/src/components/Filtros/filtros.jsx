@@ -1,35 +1,42 @@
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { genFilter, getPokemons, orderApi, orderAsc, orderBDD, orderDes } from "../../redux/actions";
 
+import style from './filtros.module.css'
 
 function Filtros (){
 
-    const pokeFiltered = useSelector(state => state.myPokemons);
-    console.log('Filtros: ',pokeFiltered);
-
-    const genFilter = (event) => {
-        console.log(event.target.value);
-    };
+    const dispatch = useDispatch();
 
     const alfaFilter = (event) => {
         if(event.target.value === 'asc'){
-            console.log('asc');
-            pokeFiltered.sort((a, b) => {
-                if(a.name>b.name) return 1;
-                if(a.name<b.name) return -1;
-                return 0
-            })
-            return pokeFiltered;
+            dispatch(orderAsc());
+
         }else if(event.target.value === 'des'){
-            console.log('des')
+            dispatch(orderDes())
+
         }else if(event.target.value === 'res'){
-            console.log('res');
+            dispatch(getPokemons());
+        }
+    };
+
+    const genFiltered = (e) => {
+        dispatch(genFilter(e.target.value))
+    };
+
+    const createdFilter = (e) => {
+        if(e.target.value === 'false') {
+            dispatch(orderApi())
+        }else if(e.target.value === 'true') {
+            dispatch(orderBDD())
+        }else if(e.target.value === 'all') {
+            dispatch(getPokemons());
         }
     };
 
     return (
         <div>
 
-            <select onChange={genFilter}>
+            <select onChange={genFiltered} className={style.select} >
                 <option defaultChecked value='reset'>Pokemons por Generacion</option>
                 <option value='primera'>Primera Generacion</option>
                 <option value='segunda'>Segunda Generacion</option>
@@ -43,10 +50,16 @@ function Filtros (){
                 <option value='especiales'>Especiales</option>
             </select>
 
-            <select onChange={alfaFilter} >
+            <select onChange={alfaFilter} className={style.select} >
                 <option defaultChecked value="res">Orden Alfabetico</option>
                 <option value="asc">Ascendente</option>
                 <option value="des">Descendente</option>
+            </select>
+
+            <select onChange={createdFilter} className={style.select} >
+                <option value="all"> - </option>
+                <option value="false">API</option>
+                <option value="true">BDD</option>
             </select>
         </div>
     )

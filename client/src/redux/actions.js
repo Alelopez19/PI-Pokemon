@@ -3,7 +3,11 @@ import axios from 'axios';
 export const GET_POKEMONS = 'GET_POKEMONS';
 export const GET_TYPES = 'GET_TYPES';
 export const GET_BY_NAME = 'GET_BY_NAME'
-export const ALFAFILTERS = 'ALFAFILTERS';
+export const ORDER_ASC = 'ORDER_ASC';
+export const ORDER_DES = 'ORDER_DES';
+export const ORDER_API = 'ORDER_API';
+export const ORDER_BDD = 'ORDER_BDD';
+export const GEN_FILTER = 'GEN_FILTER';
 
 export const getPokemons = () => {
     return async function(dispatch){
@@ -35,3 +39,61 @@ export const getByName = (name) => {
     }
 };
 
+export const orderAsc = () => {
+    return async function(dispatch){
+        const response = await axios('http://localhost:3001/pokemons');
+        const responseOrdenado = response.data.sort((a, b) => {
+            if(a.name>b.name) return 1;
+            if(a.name<b.name) return -1;
+            return 0})
+        return dispatch({
+            type: ORDER_ASC,
+            payload: responseOrdenado
+        })
+    }
+};
+
+export const orderDes = () => {
+    return async function(dispatch){
+        const response = await axios('http://localhost:3001/pokemons');
+        const responseOrdenado = response.data.sort((a, b) => {
+            if(a.name>b.name) return -1;
+            if(a.name<b.name) return 1;
+            return 0})
+        return dispatch({
+            type: ORDER_DES,
+            payload: responseOrdenado
+        })
+    }
+};
+
+export const orderApi = () => {
+    return async function(dispatch){
+        const response = await axios('http://localhost:3001/pokemons');
+        const responseOrdenado = (response.data).filter(p => p.created === false);
+        return dispatch({
+            type: ORDER_API,
+            payload: responseOrdenado
+        })
+    }
+};
+
+export const orderBDD = () => {
+    return async function(dispatch){
+        const response = await axios('http://localhost:3001/pokemons');
+        const responseOrdenado = (response.data).filter(p => p.created === true)
+        return dispatch({
+            type: ORDER_BDD,
+            payload: responseOrdenado
+        })
+    }
+};
+
+export const genFilter = (gen) => {
+    return async function (dispatch){
+        return dispatch({
+            type: GEN_FILTER,
+            payload: gen,
+        })
+    }
+}
