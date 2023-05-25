@@ -8,6 +8,7 @@ export const ORDER_DES = 'ORDER_DES';
 export const ORDER_API = 'ORDER_API';
 export const ORDER_BDD = 'ORDER_BDD';
 export const GEN_FILTER = 'GEN_FILTER';
+export const TYPE_FILTER = 'TYPE_FILTER';
 
 export const getPokemons = () => {
     return async function(dispatch){
@@ -90,10 +91,36 @@ export const orderBDD = () => {
 };
 
 export const genFilter = (gen) => {
-    return async function (dispatch){
+    return function (dispatch){
         return dispatch({
             type: GEN_FILTER,
             payload: gen,
         })
     }
-}
+};
+
+export const getTypeFilter = (type) => {
+    return async function (dispatch){
+        // const response = (await axios('http://localhost:3001/pokemons')).data;
+        // const pokemonsTypes = response.map(p => p.types[0].name);
+        // const pokefilter = (response.map(p => p.types[0].name)).filter(t => t === type);
+        // const pokefiltrado = response.filter(poke => poke === type)
+        
+        // const typeResponse = (await axios('http://localhost:3001/types')).data;
+        // const typeMap = typeResponse.map(t => t.name);
+
+        // console.log('Response: ', response);
+        // console.log('PokemonsTypes: ', pokemonsTypes);
+        // console.log('Pokemonsfilter: ', pokefilter);
+        // console.log('Pokemonsfiltrado: ', pokefiltrado);
+
+        // console.log('typeResponse: ', typeResponse);
+        // console.log('typeMap: ', typeMap);
+
+        console.log('Action:', type);
+        return dispatch({
+            type: TYPE_FILTER,
+            payload: type,
+        })
+    }
+};

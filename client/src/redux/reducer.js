@@ -1,9 +1,10 @@
-import { GEN_FILTER, GET_BY_NAME, GET_POKEMONS, GET_TYPES, ORDER_API, ORDER_ASC, ORDER_BDD, ORDER_DES } from "./actions";
+import { GEN_FILTER, GET_BY_NAME, GET_POKEMONS, GET_TYPES, ORDER_API, ORDER_ASC, ORDER_BDD, ORDER_DES, TYPE_FILTER } from "./actions";
 
 const initialState = {
     myPokemons: [],
     pokeBackUp: [],
     Types: [],
+    pokeFilter: [],
 
 };
 
@@ -13,7 +14,8 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 myPokemons: action.payload,
-                pokeBackUp: action.payload
+                pokeBackUp: action.payload,
+                pokeFilter: action.payload,
             };
 
         case GET_TYPES:
@@ -121,6 +123,15 @@ const rootReducer = (state = initialState, action) => {
             }
             break;
 
+        case TYPE_FILTER:
+            console.log('Reducer:', action.payload);
+            const pokeFilter = action.payload === 'all' ? state.myPokemons : state.myPokemons.filter(t => t.types?.includes(action.payload));
+            console.log('pokefilter: ', pokeFilter);
+            console.log(state.myPokemons.types);
+            return{
+                ...state,
+                pokeFilter: pokeFilter
+            }
         default: 
             return {...state}
     }

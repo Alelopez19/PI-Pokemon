@@ -1,11 +1,13 @@
-import { useDispatch } from "react-redux";
-import { genFilter, getPokemons, orderApi, orderAsc, orderBDD, orderDes } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { genFilter, getPokemons, getTypeFilter, orderApi, orderAsc, orderBDD, orderDes } from "../../redux/actions";
 
 import style from './filtros.module.css'
 
 function Filtros (){
 
     const dispatch = useDispatch();
+    const types = useSelector(state => state.Types);
+    const poke = useSelector(state=> state.myPokemons)
 
     const alfaFilter = (event) => {
         if(event.target.value === 'asc'){
@@ -33,6 +35,11 @@ function Filtros (){
         }
     };
 
+    // const typeFilter = (e) => {
+    //     console.log('typeFilter: ',e.target.value);
+    //     dispatch(getTypeFilter(e.target.value))
+    // };
+    
     return (
         <div>
 
@@ -61,6 +68,13 @@ function Filtros (){
                 <option value="false">API</option>
                 <option value="true">BDD</option>
             </select>
+
+            {/* {types && 
+                <select onChange={typeFilter}>
+                    <option defaultChecked value='all'>Types</option>
+                    {types.map(t => {return <option key={"created-" + t.id} value={t.name}>{t.name}</option>})}
+                </select>} */}
+
         </div>
     )
 };
