@@ -102,7 +102,6 @@ const createPokemonController = async (name,image, hp, attack, defense, speed, h
     });
 
     for (const type of types) {
-
         const typeDb = await Types.findOne({
             where: {
                 name: type.name

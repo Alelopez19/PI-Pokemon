@@ -43,13 +43,9 @@ export const getByName = (name) => {
 export const orderAsc = () => {
     return async function(dispatch){
         const response = await axios('http://localhost:3001/pokemons');
-        const responseOrdenado = response.data.sort((a, b) => {
-            if(a.name>b.name) return 1;
-            if(a.name<b.name) return -1;
-            return 0})
         return dispatch({
             type: ORDER_ASC,
-            payload: responseOrdenado
+            payload: response.data
         })
     }
 };
@@ -57,13 +53,9 @@ export const orderAsc = () => {
 export const orderDes = () => {
     return async function(dispatch){
         const response = await axios('http://localhost:3001/pokemons');
-        const responseOrdenado = response.data.sort((a, b) => {
-            if(a.name>b.name) return -1;
-            if(a.name<b.name) return 1;
-            return 0})
         return dispatch({
             type: ORDER_DES,
-            payload: responseOrdenado
+            payload: response.data
         })
     }
 };
@@ -71,10 +63,9 @@ export const orderDes = () => {
 export const orderApi = () => {
     return async function(dispatch){
         const response = await axios('http://localhost:3001/pokemons');
-        const responseOrdenado = (response.data).filter(p => p.created === false);
         return dispatch({
             type: ORDER_API,
-            payload: responseOrdenado
+            payload: response.data
         })
     }
 };
@@ -82,10 +73,9 @@ export const orderApi = () => {
 export const orderBDD = () => {
     return async function(dispatch){
         const response = await axios('http://localhost:3001/pokemons');
-        const responseOrdenado = (response.data).filter(p => p.created === true)
         return dispatch({
             type: ORDER_BDD,
-            payload: responseOrdenado
+            payload: response.data
         })
     }
 };
@@ -117,7 +107,6 @@ export const getTypeFilter = (type) => {
         // console.log('typeResponse: ', typeResponse);
         // console.log('typeMap: ', typeMap);
 
-        console.log('Action:', type);
         return dispatch({
             type: TYPE_FILTER,
             payload: type,

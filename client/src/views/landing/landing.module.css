@@ -6,7 +6,7 @@ body{
     background-attachment: fixed;
     margin: 0;
     font-size: medium;
-    background-color: orange;
+    background-color: rgb(119, 119, 119);
 }
 
 .btn {

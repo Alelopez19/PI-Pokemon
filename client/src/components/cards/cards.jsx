@@ -3,10 +3,9 @@ import Card from '../card/card'
 
 function Cards({allPokemons}) {
     const pokemonsList = allPokemons;
-    // console.log('pokemon Cards:', allPokemons);
     return (
         <div className={styles.cards}>
-            {pokemonsList.map((pokemon) => {return (<Card pokemon = {pokemon} />)})}
+            {pokemonsList.map((pokemon) => {return (<Card key={pokemon.pokeId} pokemon = {pokemon} />)})}
         </div>
     );
 }

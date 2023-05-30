@@ -35,10 +35,9 @@ function Filtros (){
         }
     };
 
-    // const typeFilter = (e) => {
-    //     console.log('typeFilter: ',e.target.value);
-    //     dispatch(getTypeFilter(e.target.value))
-    // };
+    const typeFilter = (e) => {
+        dispatch(getTypeFilter(e.target.value))
+    };
     
     return (
         <div>
@@ -69,11 +68,11 @@ function Filtros (){
                 <option value="true">BDD</option>
             </select>
 
-            {/* {types && 
+            {types && 
                 <select onChange={typeFilter}>
                     <option defaultChecked value='all'>Types</option>
                     {types.map(t => {return <option key={"created-" + t.id} value={t.name}>{t.name}</option>})}
-                </select>} */}
+                </select>}
 
         </div>
     )

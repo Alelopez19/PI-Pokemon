@@ -11,11 +11,12 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_POKEMONS:
+            const typeFiltrado = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
             return {
                 ...state,
-                myPokemons: action.payload,
-                pokeBackUp: action.payload,
-                pokeFilter: action.payload,
+                myPokemons: typeFiltrado,
+                pokeBackUp: typeFiltrado,
             };
 
         case GET_TYPES:
@@ -25,92 +26,112 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case GET_BY_NAME:
+            const byName = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
             return {
                 ...state,
-                myPokemons: action.payload
+                myPokemons: byName
             };
 
         case ORDER_ASC:
+            const actionAsc = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
+            const asc = actionAsc.sort((a, b) => {
+                if(a.name>b.name) return 1;
+                if(a.name<b.name) return -1;
+                return 0})
             return{
                 ...state,
-                myPokemons: action.payload
+                myPokemons: asc
             }
 
         case ORDER_DES:
+            const actionDes = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
+            const des = actionDes.sort((a, b) => {
+                if(a.name>b.name) return -1;
+                if(a.name<b.name) return 1;
+                return 0})
             return{
                 ...state,
-                myPokemons: action.payload
+                myPokemons: des
             }
 
         case ORDER_API:
+            const orderApi = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
             return{
                 ...state,
-                myPokemons: action.payload
+                myPokemons: orderApi.filter(p => p.created === false)
             }
 
         case ORDER_BDD:
+            const orderBdd = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                return pok})
             return{
                 ...state,
-                myPokemons: action.payload
+                myPokemons: orderBdd.filter(p => p.created === true)
             }
         
         case GEN_FILTER:
+            // const genFil = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                // return pok})
             if(action.payload === 'primera'){
-                const firstGen = state.myPokemons.slice(0, 151);
+                const firstGen = state.pokeBackUp.slice(0, 151);
                 return {
                     ...state,
                     myPokemons: firstGen
                 }
             }else if (action.payload === 'segunda'){
-                const secondGen = state.myPokemons.slice(151, 251);
+                const secondGen = state.pokeBackUp.slice(151, 251);
                 return {
                     ...state,
                     myPokemons: secondGen
                 }
             }else if (action.payload === 'tercera'){
-                const thirdGen = state.myPokemons.slice(251, 386);
+                const thirdGen = state.pokeBackUp.slice(251, 386);
                 return {
                     ...state,
                     myPokemons: thirdGen
                 }
             }else if (action.payload === 'cuarta'){
-                const fourGent = state.myPokemons.slice(386, 493);
+                const fourGent = state.pokeBackUp.slice(386, 493);
                 return {
                     ...state,
                     myPokemons: fourGent
                 }
             }else if (action.payload === 'quinta'){
-                const fiveGen = state.myPokemons.slice(493, 649);
+                const fiveGen = state.pokeBackUp.slice(493, 649);
                 return {
                     ...state,
                     myPokemons: fiveGen
                 }
             }else if (action.payload === 'sexta'){
-                const sixGen = state.myPokemons.slice(649, 721)
+                const sixGen = state.pokeBackUp.slice(649, 721)
                 return {
                     ...state,
                     myPokemons: sixGen
                 }
             }else if (action.payload === 'septima'){
-                const sevenGen = state.myPokemons.slice(721, 809);
+                const sevenGen = state.pokeBackUp.slice(721, 809);
                 return {
                     ...state,
                     myPokemons: sevenGen
                 }
             }else if (action.payload === 'octava'){
-                const eigthGen = state.myPokemons.slice(809, 905);
+                const eigthGen = state.pokeBackUp.slice(809, 905);
                 return {
                     ...state,
                     myPokemons: eigthGen
                 }
             }else if (action.payload === 'novena'){
-                const nineGen = state.myPokemons.slice(905, 1010);
+                const nineGen = state.pokeBackUp.slice(905, 1010);
                 return {
                     ...state,
                     myPokemons: nineGen
                 }
             }else if (action.payload === 'especiales'){
-                const especials = state.myPokemons.slice(1010)
+                const especials = state.pokeBackUp.slice(1010)
                 return {
                     ...state,
                     myPokemons: especials
@@ -124,13 +145,17 @@ const rootReducer = (state = initialState, action) => {
             break;
 
         case TYPE_FILTER:
-            console.log('Reducer:', action.payload);
-            const pokeFilter = action.payload === 'all' ? state.myPokemons : state.myPokemons.filter(t => t.types?.includes(action.payload));
-            console.log('pokefilter: ', pokeFilter);
-            console.log(state.myPokemons.types);
+                // const pokeFil = state.myPokemons.map(pok=>{pok.types = pok.types.map(t=>t.name) 
+                    // return pok})
+                    // .filter(t => t.types?.includes(action.payload));
+                // console.log('pokefil:', pokeFil);
+
+            const pokeFiltered = action.payload === 'all' ? state.pokeBackUp : state.pokeBackUp.filter(t => t.types?.includes(action.payload));
+            console.log('pokefiltered: ', pokeFiltered);
+            // console.log(state.myPokemons.types);
             return{
                 ...state,
-                pokeFilter: pokeFilter
+                myPokemons: pokeFiltered
             }
         default: 
             return {...state}

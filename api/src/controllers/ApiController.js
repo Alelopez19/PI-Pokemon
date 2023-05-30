@@ -39,7 +39,7 @@ const savePokeApi = async (Pokemon, Type) => {
 
 
     try {
-        const response = (await axios.get(`${URL}/pokemon?limit=1281`)).data;
+        const response = (await axios.get(`${URL}/pokemon?limit=500`)).data;
         const promises = [];
         for (const pokemon of response.results) {
             const responsePokemon = axios.get(pokemon.url);

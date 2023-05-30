@@ -8,7 +8,7 @@ import style from './home.module.css';
 function Home() {
 
     const dispatch = useDispatch();
-    const pokeFiltered = useSelector((state) => state.myPokemons);
+    const pokeRender = useSelector((state) => state.myPokemons);
 
     const [searchString, setSearchString] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
@@ -30,26 +30,26 @@ function Home() {
         setCurrentPage(0);
     };
 
-    const nextPage = () => {
-        const filter = pokeFiltered.filter(poke => poke.name.includes(searchString));
-        if(filter.length > currentPage + 12){
-            setCurrentPage(currentPage + 12 );
-        } 
-    };
+    // const nextPage = () => {
+    //     const filter = pokeRender.filter(poke => poke.name.includes(searchString));
+    //     if(filter.length > currentPage + 12){
+    //         setCurrentPage(currentPage + 12 );
+    //     } 
+    // };
     
-    const prevPage = () => {
-        if(currentPage > 0) setCurrentPage(currentPage - 12 );
-    };
+    // const prevPage = () => {
+    //     if(currentPage > 0) setCurrentPage(currentPage - 12 );
+    // };
 
     return (
     <div className={style.home}>
         <h1 className={style.h1} >PROYECTO INDIVIDUAL: POKÉMON</h1>
         <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
         <Filtros />
-        <Cards allPokemons = {(pokeFiltered.slice(currentPage, currentPage+12))} />
-        <button onClick={prevPage} className={style.btn}> ← </button>
-        <span className={style.span} >{(currentPage / 12)+1} de {(Math.round(pokeFiltered.length / 12))} </span>
-        <button onClick={nextPage} className={style.btn}> → </button>
+        <Cards allPokemons = {pokeRender} />
+        {/* <button onClick={prevPage} className={style.btn}> ← </button>
+        <span className={style.span} >{(currentPage / 12)+1} de {(Math.round(pokeRender.length / 12))} </span>
+        <button onClick={nextPage} className={style.btn}> → </button> */}
     </div>
     );
 }
