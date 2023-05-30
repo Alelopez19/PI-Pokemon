@@ -11,7 +11,14 @@ function Home() {
     const pokeRender = useSelector((state) => state.myPokemons);
 
     const [searchString, setSearchString] = useState('');
-    const [currentPage, setCurrentPage] = useState(0);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(12);
+    
+    const [pageNumbersLimit, setPageNumberLimits] = useState(10);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(10);
+    const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
     
     useEffect(() => {
         dispatch(getPokemons());
@@ -21,35 +28,88 @@ function Home() {
         dispatch(getTypes())
     }, [dispatch]);
 
+    
+    //? HANDLERS
     const handleChange = (event) => {
         setSearchString(event.target.value);
     };
-
+    
     const handleSubmit = () => {
         dispatch(getByName(searchString))
-        setCurrentPage(0);
+        setCurrentPage(1);
+    };
+    
+    const handleClick = (event) => {
+        setCurrentPage(Number(event.target.id))
+    };
+    
+    //? PAGINACION
+    const pages = [];
+    for(let i = 1; i <= Math.ceil(pokeRender.length/itemsPerPage); i++){pages.push(i);}
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFistItem = indexOfLastItem - itemsPerPage;
+    const currentItems = pokeRender.slice(indexOfFistItem, indexOfLastItem)
+
+    const renderPageNumbers = pages.map((number) => {
+        if(number < maxPageNumberLimit+1 && number > minPageNumberLimit){
+            return (
+                <li key={number} id={number} onClick={handleClick} className={currentPage === number ? "active" : null} >
+                    {number}
+                </li>
+            )
+        }else {
+            return null
+        }
+    })
+
+    const nextPage = () => {
+        setCurrentPage(currentPage+1);
+
+        if(currentPage+1 > maxPageNumberLimit){
+            setMaxPageNumberLimit(maxPageNumberLimit + pageNumbersLimit);
+            setMinPageNumberLimit(minPageNumberLimit + pageNumbersLimit);
+        }
     };
 
-    // const nextPage = () => {
-    //     const filter = pokeRender.filter(poke => poke.name.includes(searchString));
-    //     if(filter.length > currentPage + 12){
-    //         setCurrentPage(currentPage + 12 );
-    //     } 
-    // };
-    
-    // const prevPage = () => {
-    //     if(currentPage > 0) setCurrentPage(currentPage - 12 );
-    // };
+    const prevPage = () => {
+        setCurrentPage(currentPage - 1);
 
+        if((currentPage-1) % pageNumbersLimit === 0){
+            setMaxPageNumberLimit(maxPageNumberLimit - pageNumbersLimit);
+            setMinPageNumberLimit(minPageNumberLimit - pageNumbersLimit);
+        }
+    };
+
+    let pageIncrementBtn = null;
+    if(pages.length > maxPageNumberLimit){
+        pageIncrementBtn = <li onClick={nextPage} > &hellip;</li>
+    }
+
+    let pageDecrementBtn = null;
+    if(minPageNumberLimit >= 1){
+        pageDecrementBtn = <li onClick={prevPage} > &hellip; </li>
+    }
+
+    //? RENDER 
     return (
     <div className={style.home}>
         <h1 className={style.h1} >PROYECTO INDIVIDUAL: POKÉMON</h1>
         <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
         <Filtros />
-        <Cards allPokemons = {pokeRender} />
-        {/* <button onClick={prevPage} className={style.btn}> ← </button>
-        <span className={style.span} >{(currentPage / 12)+1} de {(Math.round(pokeRender.length / 12))} </span>
-        <button onClick={nextPage} className={style.btn}> → </button> */}
+        <Cards allPokemons = {currentItems} />
+
+        <span className={style.span} > {currentPage} de {Math.ceil(pokeRender.length/itemsPerPage)} </span>
+        <ul className={style.pageNumbers}>
+            <button onClick={prevPage} className={style.btn} 
+            disabled={currentPage === pages[0] ? true:false} > ← </button>
+                {pageDecrementBtn}
+                {renderPageNumbers}
+                {pageIncrementBtn}
+            <button onClick={nextPage} className={style.btn} 
+            disabled={currentPage === pages[pages.length -1] ? true:false}> → </button>
+        </ul>
+
     </div>
     );
 }

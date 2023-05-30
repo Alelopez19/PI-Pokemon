@@ -7,7 +7,6 @@ function Filtros (){
 
     const dispatch = useDispatch();
     const types = useSelector(state => state.Types);
-    const poke = useSelector(state=> state.myPokemons)
 
     const alfaFilter = (event) => {
         if(event.target.value === 'asc'){
@@ -69,7 +68,7 @@ function Filtros (){
             </select>
 
             {types && 
-                <select onChange={typeFilter}>
+                <select onChange={typeFilter} className={style.select} >
                     <option defaultChecked value='all'>Types</option>
                     {types.map(t => {return <option key={"created-" + t.id} value={t.name}>{t.name}</option>})}
                 </select>}

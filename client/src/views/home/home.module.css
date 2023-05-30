@@ -43,6 +43,32 @@
     border: none;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.pageNumbers{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+
+}
+
+.pageNumbers li{
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.pageNumbers li:active{
+    background-color: greenyellow;
+    color: black;
 }

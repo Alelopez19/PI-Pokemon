@@ -5,7 +5,7 @@ function Cards({allPokemons}) {
     const pokemonsList = allPokemons;
     return (
         <div className={styles.cards}>
-            {pokemonsList.map((pokemon) => {return (<Card key={pokemon.pokeId} pokemon = {pokemon} />)})}
+            {pokemonsList?.map((pokemon) => {return (<Card key={pokemon.pokeId} pokemon = {pokemon} />)})}
         </div>
     );
 }
