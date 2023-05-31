@@ -28,7 +28,7 @@ function Home() {
         dispatch(getTypes())
     }, [dispatch]);
 
-    
+
     //? HANDLERS
     const handleChange = (event) => {
         setSearchString(event.target.value);
@@ -89,6 +89,10 @@ function Home() {
     let pageDecrementBtn = null;
     if(minPageNumberLimit >= 1){
         pageDecrementBtn = <li onClick={prevPage} > &hellip; </li>
+    }
+    
+    if(currentItems < Math.ceil(pokeRender.length/itemsPerPage)){
+        setCurrentPage(1)
     }
 
     //? RENDER 

@@ -74,8 +74,6 @@ const rootReducer = (state = initialState, action) => {
             }
         
         case GEN_FILTER:
-            // const genFil = action.payload.map(pok=>{pok.types = pok.types.map(t=>t.name) 
-                // return pok})
             if(action.payload === 'primera'){
                 const firstGen = state.pokeBackUp.slice(0, 151);
                 return {
@@ -130,12 +128,6 @@ const rootReducer = (state = initialState, action) => {
                     ...state,
                     myPokemons: nineGen
                 }
-            }else if (action.payload === 'especiales'){
-                const especials = state.pokeBackUp.slice(1010)
-                return {
-                    ...state,
-                    myPokemons: especials
-                }
             }else if(action.payload === 'reset'){
                 return {
                     ...state,
@@ -145,14 +137,7 @@ const rootReducer = (state = initialState, action) => {
             break;
 
         case TYPE_FILTER:
-                // const pokeFil = state.myPokemons.map(pok=>{pok.types = pok.types.map(t=>t.name) 
-                    // return pok})
-                    // .filter(t => t.types?.includes(action.payload));
-                // console.log('pokefil:', pokeFil);
-
             const pokeFiltered = action.payload === 'all' ? state.pokeBackUp : state.pokeBackUp.filter(t => t.types?.includes(action.payload));
-            console.log('pokefiltered: ', pokeFiltered);
-            // console.log(state.myPokemons.types);
             return{
                 ...state,
                 myPokemons: pokeFiltered

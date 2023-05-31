@@ -52,7 +52,6 @@ function Filtros (){
                 <option value='septima'>Septima Generacion</option>
                 <option value='octava'>Octava Generacion</option>
                 <option value='novena'>Novena Generacion</option>
-                <option value='especiales'>Especiales</option>
             </select>
 
             <select onChange={alfaFilter} className={style.select} >
